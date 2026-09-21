@@ -1,44 +1,35 @@
 import Foundation
 
 /**
-This program asks the user for the radius of a circle 
-and tells the area.
-- Author: Shem
-- Version: 1.0
-- Since: 2026-12-09
+ * This program asks the user for the radius of a sphere
+ * and calculates the volume using error handling.
+ *
+ * - Author: Shem
+ * - Version: 1.0
+ * - Date: 2026-12-09
  */
-public enum TryCatch {
-    
-    /// This is the main method.
-    public static func main() {
-        // Welcome the user
-        print("Welcome to Shem's program")
-        print("Enter the radius of the circle (cm): ", terminator: "")
 
-        // Read input from the user
-        guard let radString = readLine() else {
-            return
-        }
-    
-        // Attempt to convert the string to a Double
-        if let radDouble = Double(radString) {
-            // If radius is negative, tell the user 
-            if radDouble < 0 {
-                print("The radius cannot be negative.")
-            } else {
-                // Calculate the area 
-                let area = Double.pi * pow(radDouble, 2)
+// Welcome the user
+print("Welcome to Shem's program")
+print("Enter the radius of the sphere (cm): ", terminator: "")
 
-                // Display the area, rounded to 2 decimal places
-                let formattedArea = String(format: "%.2f", area)
-                print("The area of a circle with radius, \(radString)cm, is \(formattedArea)cm^2.")
-            }
+// Read input from the command line
+if let radString = readLine() {
+    // Attempt to convert the string to a Double
+    if let radDouble = Double(radString) {
+        // Check if radius is negative
+        if radDouble < 0 {
+            print("The radius cannot be negative.")
         } else {
-            // Replicates Java's catch block for invalid numeric input
-            print("Please enter a valid radius. Could not parse '\(radString)' as Double.")
+            // Calculate the volume of a sphere: (4/3) * pi * r^3
+            let volume = (4.0 / 3.0) * Double.pi * pow(radDouble, 3)
+            
+            // Display the result formatted to 2 decimal places
+            let formattedVolume = String(format: "%.2f", volume)
+            print("The volume of a sphere with radius \(radString) cm is \(formattedVolume) cm^3.")
         }
+    } else {
+        // Triggered if Double(radString) returns nil (invalid input)
+        print("Invalid input. Please enter a valid number.")
     }
 }
-
-// Execute the main method
-TryCatch.main()
